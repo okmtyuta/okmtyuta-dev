@@ -1,19 +1,21 @@
 ---
-import Layout from "@/layouts/layout.astro";
-import { PostService } from "../../services/post.service";
-import type { CollectionEntry } from "astro:content";
+import MainFrame from "@/components/site/main-frame.astro";
+import { buttonVariants } from "@/components/ui/button";
 import {
   Card,
-  CardHeader,
-  CardDescription,
-  CardTitle,
   CardContent,
+  CardDescription,
   CardFooter,
+  CardHeader,
+  CardTitle,
 } from "@/components/ui/card";
-import { Button, buttonVariants } from "@/components/ui/button";
-import MainFrame from "@/components/site/main-frame.astro";
+import Layout from "@/layouts/layout.astro";
+import { PostService } from "../../services/post.service";
 
-const posts = await PostService.getPosts({});
+export const prerender = false;
+
+const tags = Astro.url.searchParams.getAll("tags");
+const posts = await PostService.getPosts({ tags });
 ---
 
 <Layout title="okmtyuta dev">

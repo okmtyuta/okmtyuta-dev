@@ -1,37 +1,27 @@
 ---
 import "../styles/global.css";
-
 import Layout from "@/layouts/layout.astro";
-import { PostService } from "../services/post.service";
 import type { CollectionEntry } from "astro:content";
 import MainFrame from "@/components/site/main-frame.astro";
 import {
   Card,
   CardContent,
-  CardDescription,
   CardFooter,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
 import { buttonVariants } from "@/components/ui/button";
 
-export const getStaticPaths = async () => {
-  const posts = await PostService.getPosts();
-  return posts.map((post) => {
-    return {
-      params: { slug: post.slug },
-      props: post,
-    };
-  });
-};
-
 type Props = CollectionEntry<"post">;
 ---
 
 <Layout title="okmtyuta dev">
   <MainFrame>
-    <div class="flex flex-wrap gap-2">
-      <a class={buttonVariants({ variant: "default" })} href={"/about"}>
+    <div class="grid grid-cols-4 gap-2">
+      <a
+        class={`${buttonVariants({ variant: "default" })} w-full`}
+        href={"/about"}
+      >
         About me
       </a>
     </div>
@@ -45,13 +35,33 @@ type Props = CollectionEntry<"post">;
         <CardHeader>
           <CardTitle>日記</CardTitle>
         </CardHeader>
+        <CardContent>
+          勉強したこととか旅行に行った場所とか作ったものとかをまとめています。
+        </CardContent>
         <CardContent />
         <CardFooter>
           <a
             class={`${buttonVariants({ variant: "default" })} w-full`}
             href={`/posts`}
           >
-            Read More
+            See More
+          </a>
+        </CardFooter>
+      </Card>
+
+      <Card className="grid grid-rows-[auto_1fr_auto]">
+        <CardHeader>
+          <CardTitle>ギャラリー</CardTitle>
+        </CardHeader>
+        <CardContent>
+          撮った写真とか描いた絵とかをまとめています。
+        </CardContent>
+        <CardFooter>
+          <a
+            class={`${buttonVariants({ variant: "default" })} w-full`}
+            href={`/gallery`}
+          >
+            See More
           </a>
         </CardFooter>
       </Card>
