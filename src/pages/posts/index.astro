@@ -1,0 +1,49 @@
+---
+import Layout from "@/layouts/layout.astro";
+import { PostService } from "../../services/post.service";
+import type { CollectionEntry } from "astro:content";
+import {
+  Card,
+  CardHeader,
+  CardDescription,
+  CardTitle,
+  CardContent,
+  CardFooter,
+} from "@/components/ui/card";
+import { Button, buttonVariants } from "@/components/ui/button";
+import MainFrame from "@/components/site/main-frame.astro";
+
+const posts = await PostService.getPosts({});
+---
+
+<Layout title="okmtyuta dev">
+  <MainFrame>
+    <div
+      class="grid gap-3 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 2xl:grid-cols-3"
+    >
+      {
+        posts.map((post) => {
+          return (
+            <Card className="grid grid-rows-[auto_1fr_auto]">
+              <CardHeader>
+                <CardDescription>
+                  {post.data.date.toLocaleDateString("sv-SE")}
+                </CardDescription>
+                <CardTitle>{post.data.title}</CardTitle>
+              </CardHeader>
+              <CardContent>{post.data.description}</CardContent>
+              <CardFooter>
+                <a
+                  class={`${buttonVariants({ variant: "default" })} w-full`}
+                  href={`/posts/${post.slug}`}
+                >
+                  Read More
+                </a>
+              </CardFooter>
+            </Card>
+          );
+        })
+      }
+    </div>
+  </MainFrame>
+</Layout>

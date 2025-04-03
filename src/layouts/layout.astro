@@ -1,0 +1,26 @@
+---
+import { SiteFooter } from "@/components/site/site-footer";
+import { SiteHeader } from "@/components/site/site-header";
+import { SiteMain } from "@/components/site/site-main";
+import "../styles/global.css";
+
+interface Props {
+  title: string;
+}
+
+const { title } = Astro.props;
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <title>{title}</title>
+  </head>
+  <body class="min-h-screen grid grid-rows-[auto_1fr_auto]">
+    <SiteHeader />
+    <slot />
+    <SiteFooter />
+  </body>
+</html>

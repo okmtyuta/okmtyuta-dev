@@ -1,0 +1,50 @@
+---
+import type { CollectionEntry } from "astro:content";
+import { PostService } from "../../services/post.service";
+import Layout from "@/layouts/layout.astro";
+import Prose from "@/components/site/prose.astro";
+import { SiteMain } from "@/components/site/site-main";
+import { Badge, badgeVariants } from "@/components/ui/badge";
+import PostFrame from "@/components/site/post-frame.astro";
+import MainFrame from "@/components/site/main-frame.astro";
+
+export const getStaticPaths = async () => {
+  const posts = await PostService.getPosts();
+  return posts.map((post) => {
+    return {
+      params: { slug: post.slug },
+      props: post,
+    };
+  });
+};
+
+type Props = CollectionEntry<"post">;
+const { render, data } = Astro.props;
+const { Content } = await render();
+---
+
+<Layout {...data}>
+  <PostFrame>
+    <Prose>
+      <span class="text-muted-foreground"
+        >{data.date.toLocaleDateString("sv-SE")}</span
+      >
+      <h1>{data.title}</h1>
+      <div class="flex gap-2">
+        {
+          data.tags.map((tag) => {
+            return (
+              <a
+                href={`/posts?tags=${tag}`}
+                class={`${badgeVariants({ variant: "default" })} no-underline`}
+              >
+                {tag}
+              </a>
+            );
+          })
+        }
+      </div>
+      <Content />
+    </Prose>
+  </PostFrame>
+</Layout>
