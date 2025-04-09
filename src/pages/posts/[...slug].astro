@@ -1,12 +1,11 @@
 ---
 import type { CollectionEntry } from "astro:content";
-import { PostService } from "../../services/post.service";
+
 import Layout from "@/layouts/layout.astro";
 import Prose from "@/components/site/prose.astro";
-import { SiteMain } from "@/components/site/site-main";
-import { Badge, badgeVariants } from "@/components/ui/badge";
-import PostFrame from "@/components/site/post-frame.astro";
-import MainFrame from "@/components/site/main-frame.astro";
+import { badgeVariants } from "@/components/ui/badge";
+import { PostFrame } from "@/components/site/post-frame";
+import { PostService } from "@/services/post.service";
 
 export const getStaticPaths = async () => {
   const posts = await PostService.getPosts();
