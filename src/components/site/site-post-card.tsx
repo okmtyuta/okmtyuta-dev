@@ -17,7 +17,7 @@ export const SitePostCard = (props: SitePostCardProps) => {
 	return (
 		<div>
 			<a href={`/posts/${props.slug}`} className="group">
-				<img src={thumbnail} alt="alt" className="group-hover:brightness-110" />
+				<img src={`/thumbnails/${thumbnail}`} alt="alt" className="group-hover:brightness-110" />
 
 				<div className="text-md md:text-lg lg:text-lg xl:text-lg 2xl:text-lg font-semibold text-neutral-900 group-hover:text-neutral-600 mt-3 mb-1">
 					{title}

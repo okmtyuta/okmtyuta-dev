@@ -1,6 +1,6 @@
 ---
 title: "Astroを使って簡単にブログサイトを作成する"
-thumbnail: "/src/content/post/2025-04-08/book.png"
+thumbnail: "book.png"
 tags: ["Astro", "フロントエンド"]
 date: "2025-04-09"
 description: "コンテンツ管理に特化してWebフロントエンドフレームワークであるAstroを紹介して，実際にAstroを利用したブログサイトの作成方法について説明します。"
